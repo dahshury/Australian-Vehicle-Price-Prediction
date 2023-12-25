@@ -1,0 +1,18 @@
+artifacts_root: artifacts
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  source_URL: https://storage.googleapis.com/kaggle-data-sets/4065736/7062095/compressed/Australian%20Vehicle%20Prices.csv.zip?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20231224%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231224T233741Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=825265a5b276535a388904d6292f4a2b0d5f535b8fc9fb939c34d8e3e391fccaccc850ac0575329dc0754d6a0c19b785b594800ed5aa60faeb13e1216ef0a38adb23a94f45b34cfd731d9392274749efa2a7273613b83e23b9c0a2218ee9ab775772eb4ba016ef4632742fbffa41d0955bc7c0e98572bea8f438485f2e9e1beffa6adcbf09fd34b5f151a1be19d062d593f18ed7fdf1eecec519bf9e05136353b5334f257a4487a9591cf1de68eeb260db1ead19e1b09b1ec07f7b061ddf962a4f61670f0a47f6a5c3ae6d99591e1e127a892bc79789e60525748f52200ddcdf45f9a1395f6e87b13d6e8d3886dd82f4bbe3f8ea82400bfc9c0d6332612ce875
+  local_data_file: artifacts/data_ingestion/data.zip
+
+data_validation:
+  root_dir: artifacts/data_validation
+  status_file: artifacts/data_validation/status.txt
+
+data_transformation:
+  root_dir: artifacts/data_transformation
+  csv_path: artifacts/data_ingestion/Australian Vehicle Prices.csv
+
+model_trainer:
+  root_dir: artifacts/model_trainer
+  model_name: model.pkl

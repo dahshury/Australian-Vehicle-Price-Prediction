@@ -1,0 +1,13 @@
+pandas
+numpy
+scikit-learn
+notebook
+matplotlib
+python-box==6.0.2
+pyYaml
+ensure==1.0.2
+joblib
+types-pyYaml
+fastapi
+uvicorn
+-e .

@@ -1,0 +1,23 @@
+COLUMNS:
+  Brand: object
+  Year: float64
+  Model: object
+  Car/Suv: object
+  Title: object
+  UsedOrNew: object
+  Transmission: object
+  Engine: object
+  DriveType: object
+  FuelType: object
+  FuelConsumption: object
+  Kilometres: object
+  ColourExtInt: object
+  Location: object
+  CylindersinEngine: object
+  BodyType: object
+  Doors: object
+  Seats: object
+  Price: object
+
+TARGET_COLUMN:
+  name: Price
