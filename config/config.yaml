@@ -16,3 +16,7 @@ data_transformation:
 model_trainer:
   root_dir: artifacts/model_trainer
   model_name: model.pkl
+  metrics_file_name: metrics.json
+
+model_evaluation:
+  root_dir: artifacts/model_evaluation

@@ -56,7 +56,7 @@ def create_dirs(paths: Union[list, str], verbose = False):
             custom_logger.info(f"Created directory {path}")
             
 @ensure_annotations
-def save_json(save_path: str, data: dict):
+def save_json(save_path: Path, data: dict):
     """Saves json data into a .json file stored in the given path
     Args:
         path: The path of the .json file that the data will be stored in.

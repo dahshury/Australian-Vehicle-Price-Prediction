@@ -24,3 +24,5 @@ class ModelTrainerConfig:
     root_dir: Path
     model_name: str
     target_column: str
+    metrics_file_name: Path
+    eval_root_dir: Path

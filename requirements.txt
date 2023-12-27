@@ -1,5 +1,9 @@
 pandas
 numpy
+mlflow==2.2.2
+seaborn
+xgboost
+python-multipart
 scikit-learn
 notebook
 matplotlib

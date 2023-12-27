@@ -25,7 +25,7 @@ class DataTransformation:
         df['State'] = df['Location'].str.extract(r'\, (\w+\-?\w+)')
 
         # Dropping unnecessary columns
-        df.drop(columns=['Brand', 'Car/Suv', 'Title', 'ColourExtInt', 'Location'], axis=1, inplace=True)
+        df.drop(columns=['Brand', 'Car/Suv', 'Title', 'ColourExtInt', 'Location', 'Doors', 'Seats'], axis=1, inplace=True)
 
         # Extracting fuel consumption number of liters per 100 km
         df['FuelConsumption'] = df['FuelConsumption'].str.extract(r'(\d+\.?\d*) L.*')
@@ -36,14 +36,8 @@ class DataTransformation:
         # Extracting cylinder count
         df['CylindersinEngine'] = df['CylindersinEngine'].str.extract(r'(\d+) \w+.*')
 
-        # Extracting number of doors
-        df['Doors'] = df['Doors'].str.extract(r'(\d+) Doors')
-
-        # Extracting number of seats
-        df['Seats'] = df['Seats'].str.extract(r'(\d+) Seats')
-
         # detecting non-numeric values  in the numeric columns
-        numeric_cols = ['Year', 'Kilometres', 'Price', 'Engine', 'FuelConsumption', 'CylindersinEngine', 'Doors', 'Seats']
+        numeric_cols = ['Year', 'Kilometres', 'Price', 'Engine', 'FuelConsumption', 'CylindersinEngine']
         for column in numeric_cols:
             nan = {}
             for i, price in zip(df.index, df[column]):
@@ -81,7 +75,7 @@ class DataTransformation:
                 
         # renaming
         df.rename(columns={'Kilometres': 'Kilometers',
-                        'Engine': 'Engine Displacement(L)',
+                        'Engine': 'EngineDisplacement(L)',
                         'FuelConsumption': 'FuelConsumption(L)/100km'}, inplace=True)
 
         # Reselecting

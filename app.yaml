@@ -1,0 +1,5 @@
+runtime: python310
+entrypoint: gunicorn -b :$PORT -k uvicorn.workers.UvicornWorker main:app
+
+env_variables:
+  LOGGING_LEVEL: INFO

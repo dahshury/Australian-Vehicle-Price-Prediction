@@ -50,7 +50,9 @@ class ConfigurationManager:
         model_trainer_config = ModelTrainerConfig(
             root_dir= self.config.model_trainer.root_dir,
             model_name= self.config.model_trainer.model_name,
-            target_column=self.schema.TARGET_COLUMN.name
+            metrics_file_name=self.config.model_trainer.metrics_file_name,
+            target_column=self.schema.TARGET_COLUMN.name,
+            eval_root_dir= self.config.model_evaluation.root_dir
         )
         
         return model_trainer_config
