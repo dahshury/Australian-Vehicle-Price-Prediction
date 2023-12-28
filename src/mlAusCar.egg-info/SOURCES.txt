@@ -16,6 +16,7 @@ src/mlAusCar/constants/__init__.py
 src/mlAusCar/entity/__init__.py
 src/mlAusCar/entity/config_entity.py
 src/mlAusCar/pipeline/__init__.py
+src/mlAusCar/pipeline/prediction.py
 src/mlAusCar/pipeline/stage_01_data_ingestion.py
 src/mlAusCar/pipeline/stage_02_data_validation.py
 src/mlAusCar/pipeline/stage_03_data_transformation.py

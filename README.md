@@ -2,7 +2,7 @@
 
 ![Alt text](img.png)
 
-Based on 12 features, prediction of vehicle prices in Australia.
+Exploratory Data Analysis (EDA), Data cleaning, feature extraction on 12 features and testing several ML models to predict the prices of Australian vehicles.
 
 <h3>Built With</h3>
 
@@ -25,20 +25,14 @@ This dataset contains the latest information on car prices in Australia for the 
 git clone https://github.com/dahshury/Australian-Vehicle-Price-Prediction
 ```
 
-+ STEP 02- Create a conda environment after opening the repository (optional)
++ STEP 02- Create a conda environment after opening the repository and activate it
 
 ```bash
-conda create -n auscar python=3.10 -y
+conda env create -f env.yaml
 ```
 
 ```bash
 conda activate auscar
-```
-
-+ STEP 03- install the requirements
-
-```bash
-pip install -r requirements.txt
 ```
 
 ### To Run prediction using the pretrained model
@@ -52,12 +46,60 @@ python main.py
 Now, open the following link in the browser
 
 ```bash
- 0.0.0.0:8080
+ localhost:8080
 ```
 
 You can now input the data for the vehicle, and click predict for the result.
 
+### To Run the training pipeline
+
+Now, open the following link in the browser
+
+```bash
+ localhost:8080/train
+```
+
 ### Results
+
+Random Forest model results: 
+
+RMSE: 10975.055615604264 
+
+Accuracy:0.8220697023798103 
+
+==============================
+
+Decision Tree model results: 
+
+RMSE: 12302.738100998016 
+
+Accuracy:0.7764163696168624 
+
+==============================
+
+Ada Boost model results: 
+
+RMSE: 16169.658896739993 
+
+Accuracy:0.6137769735150234 
+
+==============================
+
+Gradient Boost model results: 
+
+RMSE: 13216.418745091287 
+
+Accuracy:0.7419736693988706 
+
+==============================
+
+XG Boost model results: 
+
+RMSE: 10738.544642177703 
+
+Accuracy:0.8296558201338788 
+
+==============================
 
 The best model is XGBoost, with the following scores:
 
