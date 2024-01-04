@@ -115,7 +115,8 @@ def get_size(path: Path) -> str:
 
 def filter_choices(filters):
     # Load CSV data into a DataFrame
-    csv_path = "../../../cleaned.csv"
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    csv_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(script_dir))), "cleaned.csv")
     data = pd.read_csv(csv_path)
     defaults = {}
     if filters == {}:
