@@ -25,28 +25,34 @@ def predict(filters):
         prediction = obj.predict(data)
         formatted_price = "${:,.0f}".format(np.exp(prediction[0]))
         predicted_text = f"The predicted price is <span style='color: gold;'>{formatted_price}</span> AUD"
-        st.markdown(f"<p style='font-size:30px; text-align:center;'>{predicted_text}</p>", unsafe_allow_html=True)
+        with st.container(border=True):
+            st.markdown(f"<p style='font-size:30px; text-align:center;'>{predicted_text}</p>", unsafe_allow_html=True)
     except Exception as e:
         raise e
     
+
+fixed_options=filter_choices({})
+col1,col2,col3=st.columns(3)
+form_cols = [col1,col2,col3]
+
 # Form input data
-with st.form("Please fill/select the data"):
-    col1,col2,col3=st.columns(3)
-    form_cols = [col1,col2,col3]
+with st.form("Please fill/select the data", border=False):
     for i, col in enumerate(columns):
         options=filter_choices(filters)
-        fixed_options=filter_choices({})
+        
         if actual_col_names[i] in fixed_selection_cols:
             filters[actual_col_names[i]]=form_cols[i%3].selectbox(f"Select {col}", options=fixed_options[actual_col_names[i]])
         
         elif actual_col_names[i] in input_columns:
             if actual_col_names[i] =="Year":
                 filters[actual_col_names[i]]=form_cols[i%3].number_input(f"Type the {col}", min_value=1900, max_value=2022, step=1)
+                
             else:
                 filters[actual_col_names[i]]=form_cols[i%3].number_input(f"Type the {col}", step=1)
         else:
             filters[actual_col_names[i]]=form_cols[i%3].selectbox(f"Select {col}", options=options["choices"][actual_col_names[i]])
         
     btn=st.form_submit_button("Predict")
+    
 if btn:
     predict(filters)
