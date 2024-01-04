@@ -2,7 +2,7 @@
 
 ![Alt text](img3.png)
 
-[Try Here](https://dahshury-australian-vehicle-price-prediction-app-evarlk.streamlit.app/)
+[Try Here](https://australian-vehicle-price-prediction-dahshury.streamlit.app/)
 
 Exploratory Data Analysis (EDA), Data cleaning, feature extraction on 12 features and testing several ML models to predict the prices of Australian vehicles.
 

@@ -115,7 +115,7 @@ def get_size(path: Path) -> str:
 
 def filter_choices(filters):
     # Load CSV data into a DataFrame
-    csv_path = read_yaml(CONFIG_FILE_PATH).data_transformation.root_dir + "/cleaned.csv"
+    csv_path = "../../../cleaned.csv"
     data = pd.read_csv(csv_path)
     defaults = {}
     if filters == {}:
