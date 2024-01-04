@@ -1,6 +1,6 @@
 <h1>Australian Vehicle Price Prediction</h1>
 
-![Alt text](img.png)
+![Alt text](img3.png)
 
 Exploratory Data Analysis (EDA), Data cleaning, feature extraction on 12 features and testing several ML models to predict the prices of Australian vehicles.
 
@@ -40,6 +40,12 @@ conda activate auscar
 run the following command in the terminal
 
 ```bash
+streamlit run app.py
+```
+
+alternatively, for the static app, use the following command in the terminal
+
+```bash
 python main.py
 ```
 
@@ -61,43 +67,43 @@ Now, open the following link in the browser
 
 ### Results
 
-Random Forest model results: 
+Random Forest model results:
 
-RMSE: 10975.055615604264 
+RMSE: 10975.055615604264
 
-Accuracy:0.8220697023798103 
-
-==============================
-
-Decision Tree model results: 
-
-RMSE: 12302.738100998016 
-
-Accuracy:0.7764163696168624 
+Accuracy:0.8220697023798103
 
 ==============================
 
-Ada Boost model results: 
+Decision Tree model results:
 
-RMSE: 16169.658896739993 
+RMSE: 12302.738100998016
 
-Accuracy:0.6137769735150234 
-
-==============================
-
-Gradient Boost model results: 
-
-RMSE: 13216.418745091287 
-
-Accuracy:0.7419736693988706 
+Accuracy:0.7764163696168624
 
 ==============================
 
-XG Boost model results: 
+Ada Boost model results:
 
-RMSE: 10738.544642177703 
+RMSE: 16169.658896739993
 
-Accuracy:0.8296558201338788 
+Accuracy:0.6137769735150234
+
+==============================
+
+Gradient Boost model results:
+
+RMSE: 13216.418745091287
+
+Accuracy:0.7419736693988706
+
+==============================
+
+XG Boost model results:
+
+RMSE: 10738.544642177703
+
+Accuracy:0.8296558201338788
 
 ==============================
 

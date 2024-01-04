@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import pandas as pd
+import os
 from sklearn.compose import make_column_transformer, make_column_selector
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.model_selection import train_test_split
@@ -17,6 +18,7 @@ class DataTransformation:
         # Loading the data:
         csv_path = self.config.csv_path
         df = pd.read_csv(csv_path)
+        df_backup = df.copy(deep=True)
 
         # Most of the missing values aren't within columns we care about or are few. Safe to drop them
         df.dropna(inplace=True)
@@ -90,7 +92,13 @@ class DataTransformation:
         # splitting into train-test sets
         X = df.drop(columns = ['Price'], axis =1)
         y = df['Price']
-
+        
+        # Saving cleaned data for future use
+        # Returning brand names for better searchability
+        brands = df_backup.loc[X.index, 'Brand']
+        cleaned_df = pd.merge(brands, X, left_index=True, right_index=True)
+        cleaned_df.to_csv("./artifacts/data_transformation/" + "cleaned.csv", index=False)
+        
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42)
 
         # Transformation pipelines

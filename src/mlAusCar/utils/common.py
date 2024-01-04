@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+import pandas as pd
 import yaml
 import json
 import joblib
@@ -8,6 +9,7 @@ from box import ConfigBox
 from box.exceptions import BoxValueError
 import zipfile
 from mlAusCar import custom_logger
+from mlAusCar.constants import CONFIG_FILE_PATH
 from ensure import ensure_annotations
 
 @ensure_annotations
@@ -110,3 +112,49 @@ def get_size(path: Path) -> str:
     """
     size_in_kb = round(os.path.getsize(path)/1024)
     return f" File size is ~ {size_in_kb} KB"
+
+def filter_choices(filters):
+    # Load CSV data into a DataFrame
+    csv_path = read_yaml(CONFIG_FILE_PATH).data_transformation.root_dir + "/cleaned.csv"
+    data = pd.read_csv(csv_path)
+    defaults = {}
+    if filters == {}:
+        for key in ["Brand", "UsedOrNew", "State"]:
+            defaults[key] = data[key].unique().tolist()
+        return defaults
+    # Apply filters to the DataFrame
+    for key, value in filters.items():
+        # Checking entered data types matches the type of column's data
+        
+        if data[key].dtype.name in ('int32', 'int64') and not isinstance(value, int):
+            try:
+                value = int(value)
+                filters[key] = value
+            except:
+                raise ValueError(f"Value {value} is not of type int for column {key}.")
+            
+        elif data[key].dtype.name == 'float64' and not isinstance(value, float):
+            try:
+                value = float(value)
+                filters[key] = value
+            except:
+                raise ValueError(f"Value {value} is not of type float for column {key}.")
+            
+        elif data[key].dtype.name == 'object' and not isinstance(value, str):
+            try:
+                value = str(value)
+                filters[key] = value
+            except:
+                raise ValueError(f"Value {value} is not of type string for column {key}.")
+            
+        data = data[data[key] == value]
+
+    # Extract unique choices for each column
+    choices = {}
+    for column in data.columns:
+        choices[column] = data[column].unique().tolist()
+
+    # Create the JSON response
+    response = {'filters': filters, 'choices': choices}
+
+    return response

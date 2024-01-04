@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
+from mlAusCar.utils.common import filter_choices
 import numpy as np
 import pandas as pd
 import os
@@ -37,46 +38,49 @@ async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 @app.get("/train")
-async def train_route():
+async def train_route(): # Route to train
     os.system("python run.py")
     # os.system("dvc repro")
     return {"message": "Training done successfully!"}
 
+@app.post("/config") # Route to get return the possible configurations of the car based on currently selected features
+async def get_config(request: Request):
+    data = await request.json()
+    return filter_choices(data)
+
 @app.post("/predict")  # route to show the predictions in a web UI
-def predict(request: Request, 
-            Brand: str = Form(...),
-            Year: int = Form(...),
-            Model: str = Form(...),
-            UsedOrNew: str = Form(...),
-            Transmission: str = Form(...),
-            EngineDisplacementL: float = Form(...),
-            DriveType: str = Form(...),
-            FuelType: str = Form(...),
-            FuelConsumption: float = Form(...),
-            Kilometers: int = Form(...),
-            CylindersinEngine: int = Form(...),
-            BodyType: str = Form(...),
-            Location: str = Form(...)
+async def predict(request: Request,
+            # year: int = Form(...),
+            # model: str = Form(...),
+            # usedornew: str = Form(...),
+            # transmission: str = Form(...),
+            # displacement: float = Form(...),
+            # drivetype: str = Form(...),
+            # fueltype: str = Form(...),
+            # fuelconsumption: float = Form(...),
+            # kilometers: int = Form(...),
+            # cylinders: int = Form(...),
+            # bodytype: str = Form(...),
+            # location: str = Form(...)
             ):
+    data = await request.json()
+    return data
     try:
-        # data = [Year, Model, UsedOrNew, Transmission, EngineDisplacementL,
-        #         DriveType, FuelType, FuelConsumption, Kilometers, CylindersinEngine,
-        #         Location, BodyType]
-        # data = np.array(data).reshape(1, 12)
         data = pd.DataFrame({
-                        'Year': [Year],
-                        'Model': [Model],
-                        'UsedOrNew': [UsedOrNew],
-                        'Transmission': [Transmission],
-                        'EngineDisplacement(L)': [EngineDisplacementL],
-                        'DriveType': [DriveType],
-                        'FuelType': [FuelType],
-                        'FuelConsumption(L)/100km': [FuelConsumption],
-                        'Kilometers': [Kilometers],
-                        'CylindersinEngine': [CylindersinEngine],
-                        'State': [Location],
-                        'BodyType': [BodyType],
+                        'Year': [year],
+                        'Model': [model],
+                        'UsedOrNew': [usedornew],
+                        'Transmission': [transmission],
+                        'EngineDisplacement(L)': [displacement],
+                        'DriveType': [drivetype],
+                        'FuelType': [fueltype],
+                        'FuelConsumption(L)/100km': [fuelconsumption],
+                        'Kilometers': [kilometers],
+                        'CylindersinEngine': [cylinders],
+                        'BodyType': [bodytype],
+                        'State': [location]
                     })
+        # return data
         obj = PredictionPipeline(model_path='XG Boost model.pkl')
         prediction = obj.predict(data)
 
@@ -89,4 +93,4 @@ def predict(request: Request,
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(app="main:app", host="0.0.0.0", port=8080, reload=True)
+    uvicorn.run(app="main:app", host="localhost", port=8080, reload=True)
